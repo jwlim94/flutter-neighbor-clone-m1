@@ -22,6 +22,9 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/background.jpeg
     - assets/images/neighbor-logo.png
     - assets/images/neighbor-name-and-logo.png
     - assets/images/black-rocks.jpeg
+    - assets/images/find-storage.png
+    - assets/images/become-a-host.png
