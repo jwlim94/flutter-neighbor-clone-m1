@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neighbor_clone/widgets/host_instructions.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,24 +11,77 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void popUpBottomSheet(context) {
     showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25.0),
-          ),
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
         ),
-        backgroundColor: Colors.grey,
-        builder: (BuildContext context) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 1.1,
-            width: MediaQuery.of(context).size.width,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Text('go back'),
-            ),
-          );
-        });
+      ),
+      backgroundColor: const Color.fromARGB(255, 38, 39, 38),
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height / 1.1,
+          width: MediaQuery.of(context).size.width,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 15.0,
+                left: 30.0,
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(
+                    Icons.close_rounded,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 50.0,
+                left: 30.0,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width / 1.2,
+                  height: MediaQuery.of(context).size.height / 1.4,
+                  child: hostInstructions(context),
+                ),
+              ),
+              Positioned(
+                bottom: 40.0,
+                left: 30.0,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.2,
+                  height: MediaQuery.of(context).size.height / 16,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.lightBlue,
+                        spreadRadius: 1,
+                        offset: Offset(0, 0),
+                      )
+                    ],
+                  ),
+                  child: GestureDetector(
+                    onTap: () => print('list your space clicked'),
+                    child: const Center(
+                      child: Text(
+                        "List your space",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
