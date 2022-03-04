@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.teal,
         ),
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neighbor_clone/widgets/host_instructions.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,6 +10,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final pageController = PageController(
+    initialPage: 0, // index
+  );
+
   void popUpBottomSheet(context) {
     showModalBottomSheet(
       context: context,
@@ -26,51 +31,89 @@ class _HomeState extends State<Home> {
           child: Stack(
             children: <Widget>[
               Positioned(
-                top: 15.0,
-                left: 30.0,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(
-                    Icons.close_rounded,
-                    color: Colors.lightBlue,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 50.0,
-                left: 30.0,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 1.2,
-                  height: MediaQuery.of(context).size.height / 1.4,
-                  child: hostInstructions(context),
-                ),
-              ),
-              Positioned(
-                bottom: 40.0,
-                left: 30.0,
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 1.2,
-                  height: MediaQuery.of(context).size.height / 16,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 30.0, left: 30.0),
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(
+                        Icons.close_rounded,
                         color: Colors.lightBlue,
-                        spreadRadius: 1,
-                        offset: Offset(0, 0),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                  child: GestureDetector(
-                    onTap: () => print('list your space clicked'),
-                    child: const Center(
-                      child: Text(
-                        "List your space",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
+                ),
+              ),
+              Positioned(
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 70.0),
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: MediaQuery.of(context).size.height / 1.4,
+                    child: hostInstructions(
+                      context,
+                      pageController,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: MediaQuery.of(context).size.height / 16,
+                    margin: const EdgeInsets.only(bottom: 40.0),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.lightBlue,
+                          spreadRadius: 1,
+                          offset: Offset(0, 0),
+                        )
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap: () => print('list your space clicked'),
+                      child: const Center(
+                        child: Text(
+                          "List your space",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 16,
+                    margin: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height / 16 + 40.0),
+                    child: Center(
+                      child: SmoothPageIndicator(
+                        controller: pageController,
+                        count: 3,
+                        effect: const SlideEffect(
+                          dotWidth: 12.0,
+                          dotHeight: 12.0,
+                          activeDotColor: Colors.lightBlue,
+                        ),
+                        onDotClicked: (index) => pageController.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.bounceOut,
                         ),
                       ),
                     ),

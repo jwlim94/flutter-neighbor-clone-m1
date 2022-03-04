@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-final controller = PageController(
-  initialPage: 0, // index
-);
-
-Widget hostInstructions(context) {
+Widget hostInstructions(context, pageController) {
   return PageView(
-    controller: controller,
+    controller: pageController,
     children: <Widget>[
       Column(
         children: <Widget>[
@@ -83,8 +79,8 @@ Widget hostInstructions(context) {
             width: MediaQuery.of(context).size.width / 1.2,
             height: MediaQuery.of(context).size.height / 3,
             child: Column(
-              children: const <Widget>[
-                Align(
+              children: <Widget>[
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Make your space work for you',
@@ -95,8 +91,8 @@ Widget hostInstructions(context) {
                     ),
                   ),
                 ),
-                Divider(),
-                Align(
+                const Divider(),
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Would you clean out your garage for \$1,500? Listing' +
@@ -108,6 +104,21 @@ Widget hostInstructions(context) {
                       color: Colors.white,
                       fontSize: 16.0,
                       height: 1.5,
+                    ),
+                  ),
+                ),
+                const Divider(),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () => print('show calculator'),
+                    child: const Text(
+                      'See how much you could earn >',
+                      style: TextStyle(
+                        color: Colors.lightBlue,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
