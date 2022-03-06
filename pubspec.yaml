@@ -13,6 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0
   smooth_page_indicator: ^1.0.0+2
+  intl: ^0.17.0
+  geocoding: ^2.0.2
+  geolocator: ^8.2.0
 
 dev_dependencies:
   flutter_test:
